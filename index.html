@@ -165,7 +165,7 @@ tailwind.config = {
     <p class="text-slate-400 text-sm mb-8">جولة سريعة في أنظمة البروفيلات — 30 ثانية</p>
     <div class="card-hover rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
       <!-- Remplacer VIDEO_ID par l'ID de la vidéo YouTube (ex: youtube.com/watch?v=VIDEO_ID) -->
-      <div class="flex justify-center"><iframe class="w-full max-w-[360px] aspect-[9/16]" src="https://www.youtube.com/embed/Uli_XROK9_Q" title="Flashpen"
+      <div class="flex justify-center"><iframe class="w-full max-w-[480px] aspect-[9/16] min-h-[70vh]" src="https://www.youtube.com/embed/Uli_XROK9_Q" title="Flashpen"
               frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
     </div>
   </div>
@@ -190,7 +190,14 @@ tailwind.config = {
     <img src="images/logo-fr.png" alt="فلاشبين" class="h-8 w-auto">
     <div class="text-center md:text-left space-y-1">
       <!-- Remplacer : coordonnées réelles -->
-      <p><a href="https://maps.app.goo.gl/MD8tbHb8u3XCMoQW7" target="_blank" rel="noopener" class="hover:text-gold transition">📍 مصراتة، ليبيا — الحي الصناعي (افتح في خرائط جوجل)</a></p>
+      <div class="flex flex-col sm:flex-row items-center gap-3">
+        <p>📍 مصراتة، ليبيا — الحي الصناعي</p>
+        <a href="https://maps.app.goo.gl/MD8tbHb8u3XCMoQW7" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2 border border-gold/50 text-gold hover:bg-gold hover:text-ink transition rounded-full px-5 py-2 text-sm font-bold">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+          افتح الموقع في خرائط جوجل
+        </a>
+      </div>
       <p>✉️ contact@flashpen-libya.com · <span class="num-badge">+218 93 194 2523</span></p>
     </div>
     <span class="text-xs text-slate-600">فلاشبين ليبيا © 2026</span>
