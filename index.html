@@ -38,6 +38,16 @@ tailwind.config = {
   @keyframes fadeUp { from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:none} }
   .num-badge { font-variant-numeric: tabular-nums; }
   .prod-img { aspect-ratio: 850/590; object-fit: cover; }
+
+  /* ---------- VIDEO CLICK-TO-LOAD ---------- */
+  .video-frame{position:relative;aspect-ratio:9/16;width:100%;max-width:400px;margin:0 auto;border-radius:1.5rem;overflow:hidden;background:#000;cursor:pointer;box-shadow:0 25px 50px -12px rgba(0,0,0,0.5)}
+  .video-frame img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+  .video-frame:hover img{transform:scale(1.03)}
+  .video-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,20,32,.1) 0%,rgba(14,20,32,.4) 100%);transition:background .3s;pointer-events:none}
+  .video-frame:hover::after{background:linear-gradient(180deg,rgba(14,20,32,.2) 0%,rgba(14,20,32,.55) 100%)}
+  .video-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:74px;height:74px;border-radius:50%;background:rgba(232,178,58,.95);color:#0E1420;border:none;display:flex;align-items:center;justify-content:center;font-size:24px;padding-left:5px;transition:.3s;box-shadow:0 8px 32px rgba(0,0,0,.35);cursor:pointer}
+  .video-play:hover{transform:translate(-50%,-50%) scale(1.1);background:#E8B23A;color:#fff}
+  .video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 </style>
 </head>
 <body class="text-slate-200 font-taj antialiased">
@@ -163,11 +173,10 @@ tailwind.config = {
   <div class="max-w-4xl mx-auto text-center">
     <h2 class="text-3xl font-black text-white mb-3">شاهد <span class="gold-grad">فلاشبين</span></h2>
     <p class="text-slate-400 text-sm mb-8">جولة سريعة في أنظمة البروفيلات — 30 ثانية</p>
-    <div style="display:flex; justify-content:center; padding:0 1rem;">
-      <div style="position:relative; width:100%; max-width:400px; aspect-ratio:9/16; height:auto; min-height:480px; background:#000; border-radius:1.5rem; overflow:hidden; box-shadow:0 25px 50px -12px rgba(0,0,0,0.5);">
-        <iframe src="https://www.youtube.com/embed/Uli_XROK9_Q" title="Flashpen" allowfullscreen
-          style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; box-sizing:border-box;"></iframe>
-      </div>
+    <div class="video-frame" data-video-id="Uli_XROK9_Q" role="button" tabindex="0" aria-label="تشغيل فيديو فلاشبين">
+      <!-- Vignette : remplacer images/video-thumb.jpg par une capture de votre vidéo -->
+      <img src="images/video-thumb.jpg" alt="فلاشبين - فيديو تعريفي" loading="lazy" decoding="async">
+      <button class="video-play" aria-label="تشغيل">▶</button>
     </div>
   </div>
 </section>
@@ -249,6 +258,17 @@ document.getElementById('productGrid').innerHTML = PRODUCTS.map(p=>{
     </div>
   </div>`;
 }).join('');
+
+// Video click-to-load (évite les problèmes de redimensionnement d'iframe)
+document.querySelectorAll('.video-frame').forEach(frame=>{
+  const load=()=>{
+    const id=frame.dataset.videoId;
+    if(!id) return;
+    frame.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1" title="Flashpen video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture;web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+  };
+  frame.addEventListener('click',load);
+  frame.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();load();}});
+});
 </script>
 </body>
 </html>
